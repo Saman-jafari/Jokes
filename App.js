@@ -9,28 +9,34 @@ export default class App extends Component {
         super(props);
         this.state = {
             jokes: null,
-            textOfJoke:''
+            textOfJoke: '',
+            arraysJoke: []
         }
     }
 
     getrandom = () => {
-        const numberOfUsers = 845;
-        const randomIndex = Math.floor(Math.random() * numberOfUsers);
         let jokes = firebase.database().ref('jokes');
-
-
-        jokes
-            .once('value', (snapshot) => {
+        let arraysJoke = [];
+        if (this.state.arraysJoke.length === 0) {
+            jokes.once('value', (snapshot) => {
                 const alljokes = snapshot.val();
-                let arraysJoke = [];
-                for(let item in alljokes ){
-                    arraysJoke = arraysJoke.concat( alljokes[item]);
-
+                for (let item in alljokes) {
+                    arraysJoke = arraysJoke.concat(alljokes[item]);
                 }
+                const numberOfJokes = arraysJoke.length;
+                const randomIndex = Math.floor(Math.random() * numberOfJokes);
                 this.setState({
-                    textOfJoke: arraysJoke[randomIndex]
+                    textOfJoke: arraysJoke[randomIndex],
+                    arraysJoke: arraysJoke
                 });
             });
+        } else {
+            const numberOfUsers = this.state.arraysJoke.length;
+            const randomIndex = Math.floor(Math.random() * numberOfUsers);
+            this.setState({
+                textOfJoke: this.state.arraysJoke[randomIndex]
+            });
+        }
     };
 
     componentDidMount() {
@@ -44,22 +50,22 @@ export default class App extends Component {
 
         return (
             <Container style={{
-                backgroundColor:'#000000'
-            }} >
+                backgroundColor: '#000000'
+            }}>
                 <Header style={{
-                    backgroundColor:'#000000',
+                    backgroundColor: '#000000',
                 }}/>
-                <Content padder >
-                    <View         style={{
+                <Content padder>
+                    <View style={{
                         flexDirection: "row",
                         padding: 10,
-                        paddingBottom:30,
+                        paddingBottom: 30,
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                <Text style={styles.textOneMAMA}>{this.state.textOfJoke}</Text>
+                        <Text style={styles.textOneMAMA}>{this.state.textOfJoke}</Text>
                     </View>
-                    <Button  onPress={this.getrandom} full><Text> Get More Mama Jokes </Text></Button>
+                    <Button onPress={this.getrandom} full><Text> Get More Mama Jokes </Text></Button>
 
                 </Content>
             </Container>
@@ -74,8 +80,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    textOneMAMA:{
+    textOneMAMA: {
         fontSize: 28,
-        color:'#fff',
+        color: '#fff',
     },
 });
