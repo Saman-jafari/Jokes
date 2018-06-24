@@ -10,7 +10,8 @@ export default class App extends Component {
         this.state = {
             jokes: null,
             textOfJoke: '',
-            arraysJoke: []
+            arraysJoke: [],
+            loading:true
         }
     }
 
@@ -38,6 +39,13 @@ export default class App extends Component {
             });
         }
     };
+    async componentWillMount() {
+        await Expo.Font.loadAsync({
+            'Roboto': require('native-base/Fonts/Roboto.ttf'),
+            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+        });
+        this.setState({ loading: false });
+    }
 
     componentDidMount() {
         if (this.state.jokes === null) {
@@ -47,7 +55,9 @@ export default class App extends Component {
 
 
     render() {
-
+        if (this.state.loading) {
+            return <Expo.AppLoading />;
+        }
         return (
             <Container style={{
                 backgroundColor: '#000000'

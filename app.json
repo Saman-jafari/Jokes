@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "yomama",
+    "icon": "./99b9a7050c2f46b4b0b657e4ab0bedf4.png",
+    "version": "1.0.0",
+    "slug": "App",
+    "sdkVersion": "27.0.0",
+    "ios": {
+      "bundleIdentifier": "me.samanjafari.mamajoke"
+    },
+    "android": {
+      "package": "me.samanjafari.mamajoke"
+    }
   }
 }
