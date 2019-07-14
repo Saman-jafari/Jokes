@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "jest-expo": "^33.0.2",
     "react-native-scripts": "2.0.1",
-    "jest-expo": "~32.0.0",
     "react-test-renderer": "16.8.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -20,9 +20,9 @@
   },
   "dependencies": {
     "expo": "^32.0.5",
-    "firebase": "^5.8.2",
-    "native-base": "^2.11.0",
-    "react": "16.3.1",
-    "react-native": "~0.58.4"
+    "firebase": "6.3.0",
+    "native-base": "2.12.1",
+    "react": "16.8.6",
+    "react-native": "0.60.3"
   }
 }
